@@ -1,0 +1,24 @@
+<form [formGroup]="myForm">
+  Title: <input type="text" formControlName="title" /><br /><br />
+  Date: <input type="text" formControlName="date" /><br /><br />
+  Pairs:
+  <br />
+  <br />
+  <div formArrayName="pairs">
+    {{ myForm.get('pairs').value | json }}
+
+    <div *ngFor="let pair of pairs.controls; let i = index">
+      <div [formGroupName]="i">
+        Score: <input type="text" formControlName="score" /> Value:
+        <input type="text" formControlName="value" /> ValueRel:
+        <input type="text" formControlName="valueRel" />
+      </div>
+    </div>
+  </div>
+  <br />
+  <button (click)="resetField('score')">Reset Score</button> |
+  <button (click)="resetField('value')">Reset Value</button> |
+  <button (click)="resetField('valueRel')">Reset Value Rel</button> |
+  <button (click)="resetPairs()">Reset Pairs</button> |
+  <button (click)="setData()">Set Pairs</button>
+</form>
